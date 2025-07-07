@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useWeb3 } from '../context/Web3Context';
 
 const WalletConnect = () => {
@@ -20,6 +20,25 @@ const WalletConnect = () => {
 
   const [showDropdown, setShowDropdown] = useState(false);
   const [showNetworkSelector, setShowNetworkSelector] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+        setShowNetworkSelector(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdown]);
 
   const handleConnect = async () => {
     if (!isMetaMaskInstalled) {
@@ -89,24 +108,24 @@ const WalletConnect = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setShowDropdown(!showDropdown)}
         className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-500 text-sm"
       >
         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-        <span>{formatAddress(walletAddress)}</span>
+        <span>Wallet</span>
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
       {showDropdown && (
-        <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-700 rounded-md shadow-lg border border-gray-200 dark:border-gray-600 z-50">
+        <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-700 rounded-md shadow-lg border border-gray-200 dark:border-gray-600 z-50">
           <div className="p-4 space-y-3">
             <div>
               <h3 className="text-sm font-medium text-gray-900 dark:text-white">Wallet Info</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 break-all">
                 {walletAddress}
               </p>
             </div>
