@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build outputs (except the one we want)
+build/
+dist/
+out/
+*/build/
+*/dist/
+*/out/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*/.env
+*/.env.local
+*/.env.development.local
+*/.env.test.local
+*/.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test files
+coverage/
+.nyc_output/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Smart contract artifacts (will be generated during build)
+smart-contract/artifacts/
+smart-contract/cache/
+smart-contract/typechain/
+smart-contract/typechain-types/ 
