@@ -104,7 +104,7 @@ router.post('/job-match', auth, async (req, res) => {
 router.get('/job-recommendations', auth, async (req, res) => {
   try {
     const userId = req.user.id;
-    const { limit = 10, page = 1 } = req.query;
+    const { limit = 10, page = 1, skills, location, type } = req.query;
 
     // Get user data
     const user = await User.findById(userId);
@@ -112,15 +112,23 @@ router.get('/job-recommendations', auth, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Get available jobs (not applied to by user)
+    // Build query for available jobs
+    const query = { isActive: true };
+    
+    // Add filters if provided
+    if (location) {
+      query.location = { $regex: location, $options: 'i' };
+    }
+    if (type) {
+      query.type = type;
+    }
+
+    // Get available jobs (show all active jobs for recommendations)
     const skip = (page - 1) * limit;
-    const jobs = await Job.find({
-      _id: { $nin: user.applications || [] },
-      status: 'active'
-    })
-    .sort({ createdAt: -1 })
-    .limit(parseInt(limit))
-    .skip(skip);
+    const jobs = await Job.find(query)
+      .sort({ createdAt: -1 })
+      .limit(parseInt(limit))
+      .skip(skip);
 
     if (jobs.length === 0) {
       return res.json({
@@ -138,10 +146,7 @@ router.get('/job-recommendations', auth, async (req, res) => {
     const recommendations = await getJobRecommendations(user, jobs, parseInt(limit));
 
     // Get total count for pagination
-    const totalJobs = await Job.countDocuments({
-      _id: { $nin: user.applications || [] },
-      status: 'active'
-    });
+    const totalJobs = await Job.countDocuments(query);
 
     res.json({
       success: true,
