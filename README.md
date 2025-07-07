@@ -74,77 +74,23 @@ Intern/
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB (local or Atlas)
-- MetaMask browser extension
-- OpenAI API key (for AI features)
+### Local Development
+```bash
+# Install dependencies
+npm run install:all
 
-### Backend Setup
+# Start development servers
+npm run dev
+```
 
-1. **Navigate to backend directory:**
-   ```bash
-   cd backend
-   ```
+### Deploy to Vercel
+```bash
+# Check deployment readiness
+npm run deploy:check
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables:**
-   ```bash
-   cp env.example .env
-   # Edit .env with your configuration
-   ```
-
-4. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-
-The backend will run on `http://localhost:5000`
-
-### Frontend Setup
-
-1. **Navigate to frontend directory:**
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server:**
-   ```bash
-   npm start
-   ```
-
-The frontend will run on `http://localhost:3000`
-
-### Smart Contract Setup
-
-1. **Navigate to smart-contract directory:**
-   ```bash
-   cd smart-contract
-   ```
-
-2. **Install Hardhat:**
-   ```bash
-   npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers
-   ```
-
-3. **Compile contracts:**
-   ```bash
-   npx hardhat compile
-   ```
-
-4. **Deploy to testnet:**
-   ```bash
-   npx hardhat run scripts/deploy.js --network goerli
-   ```
+# Follow the deployment guide
+# See: DEPLOYMENT.md or VERCEL_DEPLOYMENT_QUICK_START.md
+```
 
 ## 🔧 Environment Variables
 
@@ -159,6 +105,11 @@ ADMIN_WALLET_ADDRESS=0x1234567890123456789012345678901234567890
 PLATFORM_FEE=0.001
 OPENAI_API_KEY=your-openai-api-key
 CORS_ORIGIN=http://localhost:3000
+```
+
+### Frontend (.env)
+```
+REACT_APP_API_URL=https://your-domain.vercel.app/api
 ```
 
 ## 📚 API Endpoints
@@ -271,36 +222,38 @@ npx hardhat test
 
 ## 🚀 Deployment
 
-### Frontend (Vercel)
-1. Connect GitHub repository to Vercel
-2. Set environment variables
-3. Deploy automatically on push
+### Prerequisites
+- GitHub repository
+- MongoDB Atlas account
+- Vercel account
 
-### Backend (Render)
-1. Connect GitHub repository to Render
-2. Set environment variables
-3. Deploy as Node.js service
+### Quick Deployment Steps
+1. **Prepare Code**: `npm run deploy:check`
+2. **Set up MongoDB Atlas**: Create cluster and get connection string
+3. **Deploy to Vercel**: Import GitHub repo and configure environment variables
+4. **Verify**: Test API health and frontend functionality
 
-### Smart Contract (Testnet)
-1. Deploy to Goerli testnet
-2. Verify contract on Etherscan
-3. Update frontend with contract address
+For detailed instructions, see:
+- 📖 [Full Deployment Guide](DEPLOYMENT.md)
+- ⚡ [Quick Start Guide](VERCEL_DEPLOYMENT_QUICK_START.md)
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
+4. Test thoroughly
 5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the ISC License.
 
 ## 🆘 Support
 
-For support and questions, please open an issue in the repository.
+- Check the [troubleshooting section](DEPLOYMENT.md#troubleshooting) in the deployment guide
+- Run `npm run deploy:check` to validate your setup
+- Review Vercel deployment logs for build issues
 
 ---
 

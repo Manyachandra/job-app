@@ -42,14 +42,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Serve static files from the React app build directory
+// In production (Vercel), only handle API routes
+// Static files are served by Vercel's static hosting
 if (process.env.NODE_ENV === 'production') {
-  // Serve static files from the React build directory
-  app.use(express.static(path.join(__dirname, '../../frontend/build')));
-
-  // Handle React routing, return all requests to React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
+  // Only handle API routes in production
+  app.use('*', (req, res) => {
+    res.status(404).json({ message: 'API route not found' });
   });
 } else {
   // In development, just return 404 for non-API routes

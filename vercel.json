@@ -12,7 +12,10 @@
     },
     {
       "src": "backend/src/server.js",
-      "use": "@vercel/node@3.0.0"
+      "use": "@vercel/node@3.0.0",
+      "config": {
+        "installCommand": "cd backend && npm install"
+      }
     }
   ],
   "routes": [
@@ -24,5 +27,8 @@
       "src": "/(.*)",
       "dest": "frontend/$1"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 } 

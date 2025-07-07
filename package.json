@@ -8,6 +8,7 @@
     "build:smart-contract": "cd smart-contract && npm install && npm run compile",
     "deploy:contracts": "cd smart-contract && npm run deploy",
     "setup": "node scripts/setup-deployment.js",
+    "deploy:check": "node scripts/deploy-vercel.js",
     "install:all": "npm run install:frontend && npm run install:backend && npm run install:smart-contract",
     "install:frontend": "cd frontend && npm install",
     "install:backend": "cd backend && npm install",
