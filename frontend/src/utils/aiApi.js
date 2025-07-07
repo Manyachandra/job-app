@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://knowledgeable-copper-production.up.railway.app';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://job-app-production-c883.up.railway.app';
 
 // Create axios instance with auth token
 const createApiInstance = () => {

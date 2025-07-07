@@ -212,7 +212,6 @@ sw.js
 workbox-*.js
 
 # Service worker
-service-worker.js
 
 # Cache
 .cache/
