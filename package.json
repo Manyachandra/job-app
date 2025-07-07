@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Job & Networking Portal with AI and Web3 features",
   "scripts": {
-    "build:all": "npm run build:smart-contract && npm run build:frontend",
     "build:frontend": "cd frontend && npm install && npm run build",
     "build:backend": "cd backend && npm install",
     "build:smart-contract": "cd smart-contract && npm install && npm run compile",

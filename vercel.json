@@ -1,20 +1,18 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:all",
-  "outputDirectory": "frontend/build",
-  "functions": {
-    "backend/src/server.js": {
-      "runtime": "nodejs18.x"
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
     }
-  },
+  ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/src/server.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "frontend/$1"
     }
   ]
 }
