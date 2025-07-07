@@ -98,12 +98,12 @@ npm run deploy:check
 ```env
 PORT=5000
 NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/job-networking-portal
-JWT_SECRET=your-super-secret-jwt-key
+MONGODB_URI=mongodb://localhost/your-database-name
+JWT_SECRET=your-super-secret-jwt-key-here
 JWT_EXPIRE=7d
-ADMIN_WALLET_ADDRESS=0x1234567890123456789012345678901234567890
+ADMIN_WALLET_ADDRESS=your-ethereum-wallet-address
 PLATFORM_FEE=0.001
-OPENAI_API_KEY=your-openai-api-key
+OPENAI_API_KEY=your-openai-api-key-here
 CORS_ORIGIN=http://localhost:3000
 ```
 
