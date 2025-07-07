@@ -1,5 +1,24 @@
-// Import fetch for Node.js
-const fetch = require('node-fetch');
+// Import fetch for Node.js - with fallback for ES Module issues
+let fetch;
+try {
+  fetch = require('node-fetch');
+} catch (error) {
+  console.warn('node-fetch not available, using global fetch or fallback');
+  // Use global fetch if available (Node 18+)
+  if (typeof globalThis.fetch === 'function') {
+    fetch = globalThis.fetch;
+  } else {
+    // Fallback for older Node versions
+    fetch = async (url, options) => {
+      console.warn('Fetch not available, using mock response');
+      return {
+        ok: false,
+        status: 503,
+        json: async () => ({ error: 'Fetch not available' })
+      };
+    };
+  }
+}
 const { 
   mockSkillExtraction, 
   mockJobMatch, 

@@ -16,20 +16,70 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/jobs', require('./routes/jobs'));
-app.use('/api/ai', require('./routes/ai'));
-app.use('/api/connections', require('./routes/connections'));
-app.use('/api/messages', require('./routes/messages'));
-app.use('/api/posts', require('./routes/posts'));
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
+
+// Routes with error handling
+try {
+  app.use('/api/auth', require('./routes/auth'));
+  console.log('✅ Auth routes loaded');
+} catch (error) {
+  console.error('❌ Failed to load auth routes:', error.message);
+}
+
+try {
+  app.use('/api/jobs', require('./routes/jobs'));
+  console.log('✅ Jobs routes loaded');
+} catch (error) {
+  console.error('❌ Failed to load jobs routes:', error.message);
+}
+
+try {
+  app.use('/api/ai', require('./routes/ai'));
+  console.log('✅ AI routes loaded');
+} catch (error) {
+  console.error('❌ Failed to load AI routes:', error.message);
+}
+
+try {
+  app.use('/api/connections', require('./routes/connections'));
+  console.log('✅ Connections routes loaded');
+} catch (error) {
+  console.error('❌ Failed to load connections routes:', error.message);
+}
+
+try {
+  app.use('/api/messages', require('./routes/messages'));
+  console.log('✅ Messages routes loaded');
+} catch (error) {
+  console.error('❌ Failed to load messages routes:', error.message);
+}
+
+try {
+  app.use('/api/posts', require('./routes/posts'));
+  console.log('✅ Posts routes loaded');
+} catch (error) {
+  console.error('❌ Failed to load posts routes:', error.message);
+}
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    routes: ['/api/auth', '/api/jobs', '/api/ai', '/api/connections', '/api/messages', '/api/posts']
+  });
+});
+
+// Test endpoint to verify API is working
+app.get('/api/test', (req, res) => {
+  res.json({ 
+    message: 'API is working!',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -42,18 +92,19 @@ app.use((err, req, res, next) => {
   });
 });
 
-// In production (Vercel), only handle API routes
-// Static files are served by Vercel's static hosting
-if (process.env.NODE_ENV === 'production') {
-  // Only handle API routes in production
-  app.use('*', (req, res) => {
+// Handle non-API routes (catch-all should be last)
+app.use('*', (req, res) => {
+  // Only handle non-API routes
+  if (!req.path.startsWith('/api/')) {
+    if (process.env.NODE_ENV === 'production') {
+      res.status(404).json({ message: 'Route not found' });
+    } else {
+      res.status(404).json({ message: 'Route not found' });
+    }
+  } else {
+    // API routes that weren't matched by the specific route handlers
     res.status(404).json({ message: 'API route not found' });
-  });
-} else {
-  // In development, just return 404 for non-API routes
-  app.use('*', (req, res) => {
-    res.status(404).json({ message: 'Route not found' });
-  });
-}
+  }
+});
 
 module.exports = app;
