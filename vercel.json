@@ -1,34 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build",
-        "installCommand": "cd frontend && npm install",
-        "buildCommand": "cd frontend && npm run build"
-      }
-    },
-    {
-      "src": "backend/src/server.js",
-      "use": "@vercel/node@3.0.0",
-      "config": {
-        "installCommand": "cd backend && npm install"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/src/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  "_comment": "This file is NOT used for deployment. Frontend and backend are deployed separately.",
+  "_instructions": [
+    "For backend deployment: Use backend/vercel.json",
+    "For frontend deployment: Use frontend/vercel.json",
+    "See VERCEL_SEPARATE_DEPLOYMENTS.md for deployment instructions"
+  ]
 } 
