@@ -24,7 +24,6 @@ import './App.css';
 
 // Main content component
 const MainContent = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const [recentJobs, setRecentJobs] = React.useState([]);
   const [loading, setLoading] = React.useState(true);

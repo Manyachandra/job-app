@@ -10,7 +10,6 @@ const AIDashboard = () => {
   const [error, setError] = useState(null);
   
   // Job matching state
-  const [jobMatches, setJobMatches] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [matchAnalysis, setMatchAnalysis] = useState(null);
   
