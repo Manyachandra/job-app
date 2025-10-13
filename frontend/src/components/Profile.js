@@ -4,7 +4,7 @@ import { useWeb3 } from '../context/Web3Context';
 
 const Profile = () => {
   const { user, updateProfile } = useAuth();
-  const { walletAddress, isConnected, connectWallet, disconnectWallet, isConnecting } = useWeb3();
+  const { walletAddress, isConnected, connectWallet, isConnecting } = useWeb3();
   const [form, setForm] = useState({
     name: '',
     bio: '',

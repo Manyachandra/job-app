@@ -110,9 +110,13 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="text-sm">
-                  <a href="#" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                  <button
+                    type="button"
+                    onClick={() => alert('Password reset feature coming soon!')}
+                    className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+                  >
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
               </div>
 

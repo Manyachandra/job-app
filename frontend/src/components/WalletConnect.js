@@ -12,7 +12,6 @@ const WalletConnect = () => {
     connectWallet,
     disconnectWallet,
     clearError,
-    formatAddress,
     isMetaMaskInstalled,
     changeNetwork,
     supportedNetworks

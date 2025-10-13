@@ -26,6 +26,7 @@ const PostFeed = () => {
 
   useEffect(() => {
     fetchPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const fetchPosts = async (page = 1) => {

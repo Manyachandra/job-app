@@ -198,13 +198,21 @@ const Register = () => {
                 />
                 <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                   I agree to the{' '}
-                  <a href="#" className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                  <button
+                    type="button"
+                    onClick={() => alert('Terms of Service')}
+                    className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+                  >
                     Terms of Service
-                  </a>{' '}
+                  </button>{' '}
                   and{' '}
-                  <a href="#" className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                  <button
+                    type="button"
+                    onClick={() => alert('Privacy Policy')}
+                    className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+                  >
                     Privacy Policy
-                  </a>
+                  </button>
                 </label>
               </div>
 

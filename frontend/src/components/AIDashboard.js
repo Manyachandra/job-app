@@ -34,6 +34,7 @@ const AIDashboard = () => {
       loadAvailableJobs();
       loadJobRecommendations();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const loadAvailableJobs = async () => {

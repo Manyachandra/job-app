@@ -24,6 +24,7 @@ const Messaging = () => {
         setSelectedConversation(userId);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, userId]);
 
   // Scroll to top when component mounts
