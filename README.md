@@ -257,7 +257,7 @@ This project is licensed under the ISC License.
 
 ---
 
-**Built with ❤️ for the RizeOS Core Team Internship Assessment**
+
 
 ### 🏆 **Achievement Summary**
 
